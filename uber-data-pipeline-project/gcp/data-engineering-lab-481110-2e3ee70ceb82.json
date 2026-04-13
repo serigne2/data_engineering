@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "data-engineering-lab-481110",
+  "private_key_id": "2e3ee70ceb82a584ce33338c5d1de0ceeb4f623e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDiGtXpalDC1PQW\nAGnc2Ub2jtr0W4EX+vDmlFSkZb2FHPjbsc4WsctMPTyEQQiFmg8IrgZB6b4XMJ9o\nj2EFqsxG51+tM02KbJeOZ1UUBS6v58Zjpz7k96M/TpcZuTFz4prrsy0VYuh6mpYT\nqd/hbBvMmILBwsqQy2eidGQhTXLbGaB6AbGGqJim41QtP62oNtV14nL+wqokMJvj\nnueZKucDvZDeawljKJU0Jf4huiUAHqbl4NCon2hqKdttX6VU1eLKDmWaK8wNMAew\nTUOcqyShGVL0aHZA+X/cRsoXhWAe+Haqj2qtwy/+ybihryqgpRNsI7Z0A7z3WfrC\nodT4uQRZAgMBAAECggEAcNv1R1/GdSHHvk2xice4mKxg1VTxYI9k/Kswfqi8CzwV\nac/cL07Ky8DLOradctadx3bZ77+lHz0pbI8Y3jPNaFzoUHNJsp0Wn0Gr4WTe03Xs\n/GQITFDhnuFzIadjbFVBgAH9MG4g3cXYwHLsKcCFNcAwkFfTNagaEChprIfUm1DE\nrmOrPteY17Sjw8t6zMJsVk6wRzC0CWRUpwercecwF+ljERMCjAWCt98lMrvP41UQ\nC9qCMc71hgkXJkRAcTMDxJuXa+TOqbuWOkZH3MWUUIRjq05q9iXzZZRYxHe8sZ6A\nFPCyewiKyFxqvwlxGKaFooHP6Nd00TUB4wRfylOI+wKBgQDyGogFxGypHXuwsJj/\ny8OmolgzGCWrI8Prg9GuJtjixCoFQ1WM/npbPBgKWtOE1/Y+RebO7pPeCRtqgNLA\nXo/qLf3OptyuK2Aa+g1AwNcUuu+2j3tu2kcWRURoRyEcY3Qn2i2PK8ECsk/l4eGK\n8xAY9FvqV4NHpg9fTkTupo4ipwKBgQDvFTfF6o27okt3VKLXAc/v2cXmmCIBODIi\n5bynT8/Jyged+iCK8e1a3I1M2sQ3/rSIoATqXEeTvyEAmiJbWbQrdN3f5vhPIRXc\nHVSwjQkDr6yTzs/ELWrAbZnw1caXCu1Z9VVSOwZaekJGcw/5LjSDEfPAVhayJFZ3\naK9QcMeA/wKBgBEl8/CEozWvUu2G9K9ZnXgWE606zqA6nkv2QEnXkpEtV9Sbmlms\nRLplnUZOfKDyMwziIqERoQOfHYQDr+nUSNlLfKjAhO0JQXtnrryhbBqZyxThQNrv\nNw3KxjekoiHCoZ2ZBJUZgkhQnPwpbbJL2R4LYN9OZ4wRpREZGCTXQ0YNAoGAZXam\nvcrGLbw5tMHpfb/aJFtSfoNP4x6bQG4pOwRHFcc0plmxl+YGKkpxeQ1aurzQly76\nBw/0nII/mkbPj98o9ExboRsfhE1xPoIAIBEqozLZ1byuNf5kUJfy/d9rsUxE4Kma\ndRRxpNI/8DACtmhihsGGpbijVyTOwUxfIo9KS7cCgYEAj6kIbk3LYVGb8P2XlY4q\nsUAA4GsQeiuOIsem/EONqv1timdKbbC8RbMVov9wKcNOna8EkxYv/v/gDin8C4wm\nVbpQnX/zLln4OxdZOeLGu4FqqxDPdJ3qxiCy5JCVtF0iYz4W0swaGVka8dy8kSg3\n2ptd/XaHFxgNCLajje52wpo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "uber-data-playe-project@data-engineering-lab-481110.iam.gserviceaccount.com",
+  "client_id": "116252911810885077382",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/uber-data-playe-project%40data-engineering-lab-481110.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
