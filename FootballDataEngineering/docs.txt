@@ -1,0 +1,25 @@
+#si tu vois l'erreur: Request failed with status code 403 … stage_file_with_retry … _initiate_resumable_upload
+Autrement dit : Dataflow essaie d’uploader ton pipeline dans ton bucket GCS (staging_location) et reçoit une erreur 403 – accès refusé.
+solution: forcer adc avant de lancer le script beam: export GOOGLE_APPLICATION_CREDENTIALS=/home/macbookair/data_engineering/FootballDataEngineering/gcp/data-engineering-lab-481110-e339fbfca94e.json
+
+#Etape1: Créer un service account gcp:
+Dans gcp Dans GCP Console → IAM & Admin → Service Accounts
+Ensuite Name et id par exemple: airflow-gcs-writer
+ID: airflow-gcs-writer 
+Etape 2: Ensuite donner les permissions GCP
+Toujours dans IAM, ajouter ce rôle AU SERVICE ACCOUNT : minimum recommandé 'Storage Object Creator'
+ÉTAPE 3 — Créer une clé JSON
+Sur le service account : Keys → Add key → Create new key → JSON
+puis télécharge le fichier
+ÉTAPE 4 — Monter la clé dans Docker (CRUCIAL)
+1. Place la clé sur ta VM: /home/airflow/gcp/airflow-gcs-writer.json
+2. Modifier docker-compose.yml
+Ajoute CES DEUX CHOSES à ton service airflow:
+services:
+  airflow:
+    volumes:
+      - /home/airflow/gcp:/opt/gcp
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp/airflow-gcs-writer.json
+
+#Mettre le clès dans ma local en vm

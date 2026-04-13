@@ -1,0 +1,47 @@
+FROM apache/spark:3.5.5-scala2.12-java11-python3-ubuntu
+# ---------------------------------------------------------
+# Base image officielle Apache Spark avec Python déjà inclus
+# Spark 3.5.5, Scala 2.12, Java 11, Ubuntu + Python
+# ---------------------------------------------------------
+
+USER root
+# ---------------------------------------------------------
+# Passer en root pour pouvoir installer des packages et modifier le système
+# ---------------------------------------------------------
+RUN apt-get update && \
+    apt-get install -y python3.9 python3.9-distutils python3-pip && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1 && \
+    python3 -m pip install --upgrade pip && \
+    rm -rf /var/lib/apt/lists/*
+# ---------------------------------------------------------
+# Mettre à jour la liste des packages et installer Python 3.9 + distutils + pip
+# - update-alternatives → permet de définir python3.9 comme python par défaut
+# - python3 -m pip install --upgrade pip → mettre pip à jour pour éviter les erreurs
+# - rm -rf /var/lib/apt/lists/* → nettoyer le cache apt pour réduire la taille de l'image
+# ---------------------------------------------------------
+
+
+COPY requirements.txt /tmp/requirements.txt
+# ---------------------------------------------------------
+# Copier le fichier requirements.txt dans le conteneur
+# /tmp est utilisé comme emplacement temporaire
+# --------------------------------------------------------
+RUN pip3 install --no-cache-dir -r /tmp/requirements.txt
+# ---------------------------------------------------------
+# Installer toutes les dépendances Python listées dans requirements.txt
+# --no-cache-dir → pip ne conserve pas les fichiers temporaires pour économiser de l'espace
+# ---------------------------------------------------------
+
+ENV PYSPARK_PYTHON=python3
+ENV PYSPARK_DRIVER_PYTHON=python3
+# ---------------------------------------------------------
+# Définir Python à utiliser pour Spark
+# PYSPARK_PYTHON → Python utilisé par les workers
+# PYSPARK_DRIVER_PYTHON → Python utilisé par le driver/master
+# ---------------------------------------------------------
+
+WORKDIR /opt/spark
+# ---------------------------------------------------------
+# Définir le dossier de travail par défaut dans le conteneur
+# Toutes les commandes RUN/WORKDIR ultérieures seront basées sur ce chemin

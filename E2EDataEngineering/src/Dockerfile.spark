@@ -1,0 +1,10 @@
+FROM spark:3.5.0-scala2.12-java11-ubuntu
+
+COPY requirements.txt .
+
+USER root
+
+RUN apt-get clean  && \
+	apt-get update && \
+	apt-get install -y python3-pip && \
+	pip3 install -r ./requirements.txt

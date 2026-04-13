@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "data-engineering-lab-481110",
+  "private_key_id": "e339fbfca94e8a5655013fa01f4950e2db8c3085",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCpSIcxDsgye1oi\nMdv7Dv9oCc+SH7Za3dHpDiCSrkZD0Q2D9xrAvgsLuYd9YsF5y10wejhUT1CG+7VA\niaYdbMVsQWQ9+QT0EHD7byKTk/TOWt/b60A+aPykphO3ydKQDfUSg1Gc4PJQg9X3\nF6JPgAFkzalSVvKXbZNTDMKw3rudiQkj1MSELTXVTgN3fHeEst/hoKmST4PJpTIM\nrlKueOgkCAsxVuDxBXIbwUKqDBv9Fjq37cbXytQCAadeMGTsmh83WKoZsQjS0W8x\n+Ptt7bgfQhzsYAjs27SPuNUfDV4Swg2WzT3f0EOMg2dPHj4FbRrYB9IcySDQt53G\nBQbz+jvZAgMBAAECggEAFciQ0libR8O6dC6uUWmQpuFRpfVmuzKoJwamXQ8IA69h\nvzA2b8RaGjF5pJeSBguL+7JT5VAqMJ8wp765cuKNqmyPwFnMWrZy6NKtmbKvDI7X\nwlj3dLsrJ5TSHL21LCG0/k41Blb8Ai202Y21A+iY7/vMZMgY14ZGMFMICp00JK/z\n+obB1lZuIYchh65XrpDYTA5gXNm/xrfp2PguvPCdj9PrqlaJ+kePOrjvLxs3eGHb\ncEzWRXQIfsYkuFpGY3MTOUtmg3ujExf27g7dee1jo+2cCWPdIMaS9xhDeoA6j9zO\n2Hco8z4BJI9kCW1tRoYhlYR+pSDpWy3m5XpyBK8bsQKBgQDcMxOrJkioSbfYyyKj\nd4ukZ0q0ILeC6buV5t4ITV2gUUkWUTR/HIsw+Zax5ZhX7q6C4A2ko/+R37BMgaoO\niRKYG3wi6bUCB231BUfPD7NQECWrVpUFauzGbA5YG9N+EPsZIPOoamrSSkzTZ2wT\nim2iEQCWlYrewnPqUPo+OEhv1wKBgQDEzkShKlIFjYgR26tSi+cddYTlcHox/wv0\nmQXY0JepwfHOwthN+QUJFpXtK0PY1O6LInYYA6P6xgmHRFTVyj/OnZ+UYB/Ex2kp\nxYyt+7UobxQGrrAP9EhD0DDdqYs8kaRZHyyNvGuAeubI5s0zoQ/R8/j7Cz5N1LuF\n3IjgekD7zwKBgQCsIsGdabAi3n3529KYNzvSqWyco3bRwCYEaRXpJ5GpYeHgsFp5\ng7bL8lD7gKA3HT8O0FfZ/NotDtCi/joSYtVGUzYXlNsLWwN6J0abd4qVbAoGhwi3\n036FHrOX7SjHxD6GxluzrH0VJ0AngxHZtL0/lEsBbKXCvgAfjG4TdawqwQKBgEEN\nqZPYaFpbiTHV+dCEXDXZpb8tqcai9rG4bz1W3fsIF8TvlQ5ZFPgHFjHaTkf7QoqN\nLpoLggWftoCW7q/odaT3Z0tlZrrl63YaTcEo5Z3i8ayvy5TKe6SmybBLnbG8tqWa\n72A+ew5yEZ0w5X1+bLtKuO9KrSKPAhliZ4BECPzzAoGAM0nc2cvlOcV95XM//M7x\nNrC/ekTYZBI1XpKbqN5D9fqdvb1eMhOrfnhSH58+x9AUD3r72FaJtFHf76wtbfL1\nV10qYXz5W7jrGfhmI9KFNBaOx+gqq4DhBP+YdeJsNn9ei9pSRBhZuZrDvQoCjESU\neMkqCjk/aGeG5Qd61C3qHDc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "airflow-gcs-writer@data-engineering-lab-481110.iam.gserviceaccount.com",
+  "client_id": "108890372238618311510",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/airflow-gcs-writer%40data-engineering-lab-481110.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
