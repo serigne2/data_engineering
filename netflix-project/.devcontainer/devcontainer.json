@@ -4,12 +4,6 @@
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-  "features": {
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "3.11"
-    }
-  },
-
   "forwardPorts": [9000, 9001],
   "portsAttributes": {
     "9000": {

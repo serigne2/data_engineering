@@ -1,0 +1,11 @@
+git add . && git commit -m "add devcontainer" && git push
+
+docker compose -f .devcontainer/docker-compose.yml up -d --build
+
+docker compose -f .devcontainer/docker-compose.yml ps
+
+docker compose -f .devcontainer/docker-compose.yml exec app pip install boto3 pandas snowflake-connector-python
+
+ /home/codespace/.dbt/profiles.yml
+
+  dbt run  --model fct_genome_scores == dbt run --select fct_rating

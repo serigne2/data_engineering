@@ -1,0 +1,40 @@
+[0m12:08:15.396217 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x781ff9428260>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x781ff76abce0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x781ff6beae10>]}
+
+
+============================== 12:08:15.399726 | 9e1e1247-4873-4600-835a-72f7fec943a0 ==============================
+[0m12:08:15.399726 [info ] [MainThread]: Running with dbt=1.12.3
+[0m12:08:15.400515 [debug] [MainThread]: running dbt with arguments {'log_format': 'default', 'version_check': 'True', 'no_print': 'None', 'introspect': 'True', 'log_cache_events': 'False', 'use_colors': 'True', 'target_path': 'None', 'debug': 'False', 'static_parser': 'True', 'fail_fast': 'False', 'partial_parse': 'True', 'hints_enabled': 'True', 'profiles_dir': '/home/codespace/.dbt', 'invocation_command': 'dbt init netflix', 'maximum_seed_size_mib': '1', 'write_json': 'True', 'indirect_selection': 'eager', 'quiet': 'False', 'use_experimental_parser': 'False', 'warn_error': 'None', 'empty': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'send_anonymous_usage_stats': 'True', 'printer_width': '80', 'log_path': 'logs', 'cache_selected_only': 'False'}
+[0m12:08:15.412085 [debug] [MainThread]: Starter project path: /workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/include/starter_project
+[0m12:08:15.414917 [info ] [MainThread]: Setting up your profile.
+[0m12:08:47.122594 [error] [MainThread]: [[31mERROR[0m]: Encountered an error:
+
+[0m12:08:47.125111 [error] [MainThread]: Traceback (most recent call last):
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/cli/requires.py", line 198, in wrapper
+    result, success = func(*args, **kwargs)
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/cli/requires.py", line 144, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/cli/main.py", line 504, in init
+    results = task.run()
+              ^^^^^^^^^^
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/task/init.py", line 363, in run
+    self.setup_profile(profile_name)
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/task/init.py", line 264, in setup_profile
+    adapter = self.ask_for_adapter_choice()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/dbt/task/init.py", line 245, in ask_for_adapter_choice
+    numeric_choice = click.prompt(prompt_msg, type=click.INT)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/click/termui.py", line 262, in prompt
+    value = prompt_func(prompt)
+            ^^^^^^^^^^^^^^^^^^^
+  File "/workspaces/data_engineering/netflix-project/netflix/lib/python3.12/site-packages/click/termui.py", line 245, in prompt_func
+    raise Abort() from None
+click.exceptions.Abort
+
+[0m12:08:47.143490 [debug] [MainThread]: Resource report: {"command_name": "init", "command_success": false, "command_wall_clock_time": 31.827719, "process_in_blocks": "104", "process_kernel_time": 0.124473, "process_mem_max_rss": "111448", "process_out_blocks": "64", "process_user_time": 1.552438}
+[0m12:08:47.144244 [debug] [MainThread]: Command `dbt init` failed at 12:08:47.144125 after 31.83 seconds
+[0m12:08:47.144741 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x781ff86dbd70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x781ff627dd00>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x781ff76abce0>]}
+[0m12:08:47.145290 [debug] [MainThread]: Flushing usage events
+[0m12:08:47.532377 [debug] [MainThread]: An error was encountered while trying to flush usage events
