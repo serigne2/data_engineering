@@ -1,0 +1,10 @@
+# Python environments
+**/.venv/
+**/ven-zomato/
+netflix-project/netflix/
+
+# Environment variables / secrets
+**/.env
+
+# Large local Netflix datasets
+netflix-project/data/*.csv
