@@ -1,0 +1,27 @@
+{
+  "name": "zomato-data-engineering",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+  "forwardPorts": [9000, 9001],
+  "portsAttributes": {
+    "9000": {
+      "label": "MinIO API (S3-compatible)"
+    },
+    "9001": {
+      "label": "MinIO Console (Web UI)"
+    }
+  },
+
+  "postCreateCommand": "pip install --user boto3 pandas snowflake-connector-python",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  }
+}

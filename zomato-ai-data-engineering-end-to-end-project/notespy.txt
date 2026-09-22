@@ -1,0 +1,207 @@
+#chargement des anciens fichiers
+import os
+import csv
+import boto3
+import snowflake.connector
+
+from dotenv import load_dotenv
+from botocore.client import Config
+
+
+# ============================================================
+# Load environment variables
+# ============================================================
+
+load_dotenv()
+
+
+# ============================================================
+# Configuration
+# ============================================================
+
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "http://localhost:9000")
+MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
+MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY", "minioadmin")
+
+BUCKET = "zomatodataset"
+
+SNOWFLAKE_ACCOUNT = os.environ["SNOWFLAKE_ACCOUNT"]
+SNOWFLAKE_USER = os.environ["SNOWFLAKE_USER"]
+SNOWFLAKE_PASSWORD = os.environ["SNOWFLAKE_PASSWORD"]
+
+
+# ============================================================
+# MinIO connection
+# ============================================================
+
+s3 = boto3.client(
+    "s3",
+    endpoint_url=MINIO_ENDPOINT,
+    aws_access_key_id=MINIO_ACCESS_KEY,
+    aws_secret_access_key=MINIO_SECRET_KEY,
+    config=Config(signature_version="s3v4"),
+    region_name="us-east-1",
+)
+
+print("✓ Connexion MinIO OK")
+
+
+# ============================================================
+# Snowflake connection
+# ============================================================
+
+conn = snowflake.connector.connect(
+    account=SNOWFLAKE_ACCOUNT,
+    user=SNOWFLAKE_USER,
+    password=SNOWFLAKE_PASSWORD,
+    warehouse="ZOMATO_WH",
+    database="ZOMATO",
+    schema="RAW",
+)
+
+cursor = conn.cursor()
+
+print("✓ Connexion Snowflake OK")
+
+
+# ============================================================
+# File configuration
+# ============================================================
+
+files = {
+    "raw/food/food.csv": {
+        "table": "ZOMATO.RAW.FOOD",
+        "columns": ["_idx", "f_id", "item", "veg_or_non_veg"],
+    },
+
+    "raw/menu/menu.csv": {
+        "table": "ZOMATO.RAW.MENU",
+        "columns": ["_idx", "menu_id", "r_id", "f_id", "cuisine", "price"],
+    },
+
+    "raw/restaurant/restaurant.csv": {
+        "table": "ZOMATO.RAW.RESTAURANTS",
+        "columns": [
+            "_idx",
+            "id",
+            "name",
+            "city",
+            "rating",
+            "rating_count",
+            "cost",
+            "cuisine",
+            "lic_no",
+            "link",
+            "address",
+            "menu",
+        ],
+    },
+
+    "raw/users/users.csv": {
+        "table": "ZOMATO.RAW.USERS",
+        "columns": [
+            "_idx",
+            "user_id",
+            "name",
+            "email",
+            "password",
+            "age",
+            "gender",
+            "marital_status",
+            "occupation",
+            "monthly_income",
+            "education",
+            "family_size",
+        ],
+    },
+}
+
+
+# ============================================================
+# Load one CSV
+# ============================================================
+
+def load_csv(minio_key, config, batch_size=10_000):
+    table = config["table"]
+    columns = config["columns"]
+
+    print(f"\n→ Chargement de {minio_key}")
+    print(f"  Destination : {table}")
+    print(f"  Batch size  : {batch_size:,}")
+
+    response = s3.get_object(Bucket=BUCKET, Key=minio_key)
+
+    # Lecture correcte du CSV directement depuis le flux MinIO
+    import io
+
+    text_stream = io.TextIOWrapper(
+        response["Body"],
+        encoding="utf-8",
+        newline=""
+    )
+
+    reader = csv.reader(text_stream)
+
+    # Ignore le header
+    next(reader)
+
+    placeholders = ", ".join(["%s"] * len(columns))
+    column_list = ", ".join(columns)
+
+    sql = f"""
+        INSERT INTO {table} ({column_list})
+        VALUES ({placeholders})
+    """
+
+    batch = []
+    row_count = 0
+
+    for row in reader:
+
+        # Conversion des chaînes vides en NULL
+        row = [None if value == "" else value for value in row]
+
+        batch.append(row)
+
+        # Quand le batch atteint 10 000 lignes
+        if len(batch) >= batch_size:
+            cursor.executemany(sql, batch)
+
+            row_count += len(batch)
+            print(f"  ✓ {row_count:,} lignes chargées")
+
+            batch = []
+
+    # Charge le dernier batch s'il reste des lignes
+    if batch:
+        cursor.executemany(sql, batch)
+
+        row_count += len(batch)
+        print(f"  ✓ {row_count:,} lignes chargées")
+
+    conn.commit()
+
+    print(f"  ✓ Total : {row_count:,} lignes")
+
+
+# ============================================================
+# Main
+# ============================================================
+
+try:
+
+    for minio_key, config in files.items():
+        load_csv(minio_key, config)
+    #load_csv(
+    #"raw/food/food.csv",
+    #files["raw/food/food.csv"]
+    #)
+
+finally:
+
+    cursor.close()
+    conn.close()
+
+    print("\n✓ Connexion Snowflake fermée")
+
+print("\n✓ Chargement terminé.")

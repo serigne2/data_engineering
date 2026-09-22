@@ -1,0 +1,80 @@
+food.csv, menu.csv, order_items.csv, orders.csv, restaurant.csv, reviews.csv, users.csv
+
+pip install boto3 pandas snowflake-connector-python
+
+cette commande ne demaarre aucun conteneur verifie que docker a bien compris notre configuration:
+# docker compose -f .devcontainer/docker-compose.yml config
+
+Pour verifier si c'est ok:
+docker compose -f .devcontainer/docker-compose.yml build airflow-init
+
+#lancer les conteneurs: 
+docker compose --env-file .env -f .devcontainer/docker-compose.yml up -d
+#verifier les logs d'api serveur
+docker compose --env-file .env -f .devcontainer/docker-compose.yml logs apiserver --tail=100  
+
+#Tester une tache dbt:
+docker compose --env-file .env -f .devcontainer/docker-compose.yml exec scheduler \
+/opt/airflow/dbt_venv/bin/dbt debug \
+--project-dir /opt/airflow/dbt/zomato \
+--profiles-dir /opt/airflow/dbt/zomato
+
+#builder tout 
+docker compose --env-file .env -f .devcontainer/docker-compose.yml exec scheduler \
+/opt/airflow/dbt_venv/bin/dbt build \
+--project-dir /opt/airflow/dbt/zomato \
+--profiles-dir /opt/airflow/dbt/zomato
+
+
+parie ingestion:
+             MINIO
+               │
+               ▼
+       ETag + file size
+               │
+               ▼
+       INGESTION_LOG
+               │
+        ┌──────┴──────┐
+        │             │
+     connu          nouveau
+        │             │
+        ▼             ▼
+       SKIP      Download
+                      │
+                      ▼
+                     PUT
+                      │
+                      ▼
+                    COPY
+                      │
+                      ▼
+                 MERGE LOG
+
+architecture:
+                 DATA LAKE
+                    │
+                    ▼
+                 MinIO
+              zomatodataset
+                    │
+                    ▼
+             fichier CSV brut
+                    │
+                    ▼
+              transfert bulk
+                    │
+                    ▼
+        Snowflake Internal Stage
+                    │
+                    ▼
+                COPY INTO
+                    │
+                    ▼
+             ZOMATO.RAW
+                    │
+                    ▼
+                  dbt
+                    │
+                    ▼
+          STAGING → MARTS

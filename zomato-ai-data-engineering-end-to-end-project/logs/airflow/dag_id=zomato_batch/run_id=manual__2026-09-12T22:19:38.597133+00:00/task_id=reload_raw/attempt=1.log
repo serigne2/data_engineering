@@ -1,0 +1,109 @@
+{"timestamp":"2026-09-12T22:19:40.854169","level":"info","event":"DAG bundles loaded: dags-folder","logger":"airflow.dag_processing.bundles.manager.DagBundlesManager"}
+{"timestamp":"2026-09-12T22:19:40.858261","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/zomato_batch.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2026-09-12T22:19:43.984424","level":"info","event":"Tmp dir root location: /tmp","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:43.986911","level":"info","event":"Running command: ['/usr/bin/bash', '-c', 'python /opt/airflow/scripts/load_minio_to_snowflake.py --all']","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:44.018323","level":"info","event":"Output:","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617432","level":"info","event":"✓ Connexion MinIO configurée","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617575","level":"info","event":"✓ Connexion Snowflake OK","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617651","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617717","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617784","level":"info","event":"CHARGEMENT : restaurants","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617843","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617900","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.617958","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618028","level":"info","event":"  Source : s3://zomatodataset/raw/restaurant/restaurant.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618087","level":"info","event":"  Taille : 46,731,352 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618144","level":"info","event":"  ETag   : ced5cfa84308c897d65fa4532feb5f80-6","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618210","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618268","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618329","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618388","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.618528","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.623418","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.623832","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.623911","level":"info","event":"CHARGEMENT : users","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.623967","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.624019","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.624071","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.624147","level":"info","event":"  Source : s3://zomatodataset/raw/users/users.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.624197","level":"info","event":"  Taille : 11,239,820 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.624246","level":"info","event":"  ETag   : 6e8fc1df40fb09c65a8c33814b4bd5f1-2","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.624295","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626209","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626302","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626367","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626424","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626479","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626532","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626610","level":"info","event":"CHARGEMENT : food","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626662","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626713","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626764","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626819","level":"info","event":"  Source : s3://zomatodataset/raw/food/food.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626870","level":"info","event":"  Taille : 17,208,649 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626923","level":"info","event":"  ETag   : d504a9b1b41029d1b721200ef9d827c7-3","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.626973","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627023","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627076","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627130","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627180","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627233","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627282","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627334","level":"info","event":"CHARGEMENT : menu","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627376","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627423","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627472","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.627522","level":"info","event":"  Source : s3://zomatodataset/raw/menu/menu.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.630772","level":"info","event":"  Taille : 65,833,035 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.630857","level":"info","event":"  ETag   : d49b5bfb2071a6b7cc56125c8191d5ef-8","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.630920","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.630976","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631028","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631077","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631123","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631168","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631213","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631256","level":"info","event":"CHARGEMENT : orders","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631299","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631344","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631390","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631435","level":"info","event":"  Source : s3://zomatodataset/raw/orders/orders.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631476","level":"info","event":"  Taille : 1,332,004,808 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.631515","level":"info","event":"  ETag   : e279e61a86b57683730bc8579907919a-159","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.633554","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.634222","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.634303","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.634366","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.634419","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.634473","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.634522","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.635726","level":"info","event":"CHARGEMENT : order_items","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.635803","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.635859","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.635908","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.635960","level":"info","event":"  Source : s3://zomatodataset/raw/order_items/order_items.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636009","level":"info","event":"  Taille : 955,117,276 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636056","level":"info","event":"  ETag   : 144ace77c9a1dcbc351bc097fed5ef3f-114","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636102","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636147","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636195","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636239","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636284","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636333","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636378","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636423","level":"info","event":"CHARGEMENT : reviews","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636469","level":"info","event":"======================================================================","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.636515","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.638788","level":"info","event":"→ Vérification du fichier dans MinIO","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.638883","level":"info","event":"  Source : s3://zomatodataset/raw/reviews/reviews.csv","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.638944","level":"info","event":"  Taille : 25,406,720 bytes","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.638993","level":"info","event":"  ETag   : 08f9020c5a863ee2b5cf4e13beee0fbc-4","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639041","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639097","level":"info","event":"✓ Fichier déjà traité → SKIP","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639148","level":"info","event":"  Aucun téléchargement effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639195","level":"info","event":"  Aucun PUT effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639244","level":"info","event":"  Aucun COPY effectué.","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639300","level":"info","event":"","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:57.639351","level":"info","event":"✓ Connexion Snowflake fermée","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:58.099782","level":"info","event":"Command exited with return code 0","logger":"airflow.task.hooks.airflow.providers.standard.hooks.subprocess.SubprocessHook"}
+{"timestamp":"2026-09-12T22:19:58.100507","level":"info","event":"Pushing xcom","ti":"RuntimeTaskInstance(id=UUID('01a097b4-6b0f-7930-8840-ad17118c08e6'), task_id='reload_raw', dag_id='zomato_batch', run_id='manual__2026-09-12T22:19:38.597133+00:00', try_number=1, map_index=-1, hostname='4c216520d0b2', context_carrier=None, task=<Task(BashOperator): reload_raw>, bundle_instance=LocalDagBundle(name=dags-folder), max_tries=0, start_date=datetime.datetime(2026, 9, 12, 22, 19, 39, 145987, tzinfo=datetime.timezone.utc), end_date=None, state=<TaskInstanceState.RUNNING: 'running'>, is_mapped=False, rendered_map_index=None, log_url='https://expert-space-guide-49xj5xpgq5wcjjpj-8080.app.github.devdags/zomato_batch/runs/manual__2026-09-12T22%3A19%3A38.597133%2B00%3A00/tasks/reload_raw?try_number=1')","logger":"task"}

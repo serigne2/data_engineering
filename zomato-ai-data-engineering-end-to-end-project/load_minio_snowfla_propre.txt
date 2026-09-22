@@ -1,0 +1,299 @@
+import os
+import csv
+import boto3
+import snowflake.connector
+
+from dotenv import load_dotenv
+from botocore.client import Config
+
+
+# ============================================================
+# Load environment variables
+# ============================================================
+
+load_dotenv()
+
+
+# ============================================================
+# Configuration
+# ============================================================
+
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "http://localhost:9000")
+MINIO_ACCESS_KEY = os.getenv("MINIO_ACCESS_KEY", "minioadmin")
+MINIO_SECRET_KEY = os.getenv("MINIO_SECRET_KEY", "minioadmin")
+
+BUCKET = "zomatodataset"
+
+SNOWFLAKE_ACCOUNT = os.environ["SNOWFLAKE_ACCOUNT"]
+SNOWFLAKE_USER = os.environ["SNOWFLAKE_USER"]
+SNOWFLAKE_PASSWORD = os.environ["SNOWFLAKE_PASSWORD"]
+
+
+# ============================================================
+# MinIO connection
+# ============================================================
+
+s3 = boto3.client(
+    "s3",
+    endpoint_url=MINIO_ENDPOINT,
+    aws_access_key_id=MINIO_ACCESS_KEY,
+    aws_secret_access_key=MINIO_SECRET_KEY,
+    config=Config(signature_version="s3v4"),
+    region_name="us-east-1",
+)
+
+print("✓ Connexion MinIO OK")
+
+
+# ============================================================
+# Snowflake connection
+# ============================================================
+
+conn = snowflake.connector.connect(
+    account=SNOWFLAKE_ACCOUNT,
+    user=SNOWFLAKE_USER,
+    password=SNOWFLAKE_PASSWORD,
+    warehouse="ZOMATO_WH",
+    database="ZOMATO",
+    schema="RAW",
+)
+
+cursor = conn.cursor()
+
+print("✓ Connexion Snowflake OK")
+
+
+# ============================================================
+# File configuration
+# ============================================================
+
+files = {
+    "raw/orders/orders.csv": {
+    "table": "ZOMATO.RAW.ORDERS",
+    "columns": [
+        "order_id",
+        "order_timestamp",
+        "order_date",
+        "user_id",
+        "r_id",
+        "restaurant_city",
+        "cuisine",
+        "items_count",
+        "sales_qty",
+        "subtotal",
+        "discount",
+        "delivery_fee",
+        "gst",
+        "sales_amount",
+        "currency",
+        "payment_method",
+        "order_status",
+        "customer_rating",
+        "delivery_time_min",
+    ],
+},
+
+"raw/order_items/order_items.csv": {
+    "table": "ZOMATO.RAW.ORDER_ITEMS",
+    "columns": [
+        "order_item_id",
+        "order_id",
+        "r_id",
+        "f_id",
+        "price",
+        "quantity",
+        "line_amount",
+    ],
+},
+
+"raw/reviews/reviews.csv": {
+    "table": "ZOMATO.RAW.REVIEWS",
+    "columns": [
+        "review_id",
+        "order_id",
+        "user_id",
+        "restaurant_id",
+        "rating",
+        "comment",
+        "review_date",
+    ],
+},
+}
+
+
+def download_from_minio(minio_key):
+    filename = os.path.basename(minio_key)
+    local_path = os.path.join("/tmp", filename)
+
+    print(f"\n→ Téléchargement de {minio_key}")
+    print(f"  Destination locale : {local_path}")
+
+    s3.download_file(
+        BUCKET,
+        minio_key,
+        local_path
+    )
+
+    file_size_mb = os.path.getsize(local_path) / (1024 * 1024)
+
+    print(f"  ✓ Téléchargement terminé : {file_size_mb:,.1f} MB")
+
+    return local_path
+
+import time
+
+
+def bulk_load_to_snowflake(local_file, table, stage_path):
+    """
+    Charge un fichier local dans Snowflake via :
+    PUT -> Internal Stage -> COPY INTO
+    """
+
+    print(f"\n→ Chargement BULK de {local_file}")
+    print(f"  Destination : {table}")
+    print(f"  Stage       : {stage_path}")
+
+    start = time.time()
+
+    # 1. Upload du fichier vers le stage interne Snowflake
+    print("\n  [1/2] PUT vers Snowflake Internal Stage...")
+
+    put_sql = f"""
+        PUT file://{local_file}
+        @{stage_path}
+        AUTO_COMPRESS=TRUE
+        PARALLEL=8
+    """
+
+    result = cursor.execute(put_sql).fetchall()
+
+    put_time = time.time() - start
+
+    print(f"  ✓ PUT terminé en {put_time / 60:.1f} min")
+
+    for row in result:
+        print(f"  {row}")
+
+    # 2. COPY INTO Snowflake
+    print("\n  [2/2] COPY INTO Snowflake...")
+
+    copy_start = time.time()
+
+    copy_sql = f"""
+        COPY INTO {table}
+        FROM @{stage_path}/
+        FILE_FORMAT = (FORMAT_NAME = 'ZOMATO.RAW.CSV_FMT')
+        ON_ERROR = 'ABORT_STATEMENT'
+    """
+
+    copy_result = cursor.execute(copy_sql).fetchall()
+
+    copy_time = time.time() - copy_start
+
+    print(f"  ✓ COPY terminé en {copy_time / 60:.1f} min")
+
+    for row in copy_result:
+        print(f"  {row}")
+
+    conn.commit()
+
+    total_time = time.time() - start
+
+    print(f"\n✓ Chargement BULK terminé en {total_time / 60:.1f} min")
+
+# ============================================================
+# Load one CSV
+# ============================================================
+
+def load_csv(local_path, config, batch_size=10_000):
+    table = config["table"]
+    columns = config["columns"]
+
+    print(f"\n→ Chargement de {local_path}")
+    print(f"  Destination : {table}")
+    print(f"  Batch size  : {batch_size:,}")
+
+    with open(local_path, "r", encoding="utf-8", newline="") as file:
+        reader = csv.reader(file)
+
+        # Ignore le header
+        next(reader)
+
+        placeholders = ", ".join(["%s"] * len(columns))
+        column_list = ", ".join(columns)
+
+        sql = f"""
+            INSERT INTO {table} ({column_list})
+            VALUES ({placeholders})
+        """
+
+        batch = []
+        row_count = 0
+
+        for row in reader:
+
+            row = [
+                None if value == "" else value
+                for value in row
+            ]
+
+            batch.append(row)
+
+            if len(batch) >= batch_size:
+                cursor.executemany(sql, batch)
+
+                row_count += len(batch)
+
+                print(f"  ✓ {row_count:,} lignes chargées")
+
+                batch = []
+
+        # Dernier batch
+        if batch:
+            cursor.executemany(sql, batch)
+
+            row_count += len(batch)
+
+            print(f"  ✓ {row_count:,} lignes chargées")
+
+    conn.commit()
+
+    print(f"  ✓ Total : {row_count:,} lignes")
+
+
+# ============================================================
+# Main
+# ============================================================
+
+try:
+
+    #for minio_key, config in files.items():
+    #    load_csv(minio_key, config)
+    #local_orders = download_from_minio("raw/orders/orders.csv")
+    local_order_items = download_from_minio(
+           "raw/reviews/reviews.csv"
+    )
+
+    bulk_load_to_snowflake(
+        local_file=local_order_items,
+        table="ZOMATO.RAW.REVIEWS",
+        stage_path="ZOMATO.RAW.ZOMATO_INTERNAL_STAGE/reviews"
+    )
+    #load_csv(
+    #    local_orders,
+    #    files["raw/orders/orders.csv"],
+    #    batch_size=10_000
+    #)
+    #load_csv(
+    #"raw/food/food.csv",
+    #files["raw/food/food.csv"]
+    #)
+
+finally:
+
+    cursor.close()
+    conn.close()
+
+    print("\n✓ Connexion Snowflake fermée")
+
+print("\n✓ Chargement terminé.")
