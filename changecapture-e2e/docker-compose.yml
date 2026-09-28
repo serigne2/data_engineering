@@ -101,7 +101,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      code-with-yu:
+      cdc-network:
 
   debezium-ui:
     image: debezium/debezium-ui:latest
@@ -115,7 +115,7 @@ services:
     environment:
       KAFKA_CONNECT_URIS: http://debezium:8083
     networks:
-      code-with-yu:
+      cdc-network:
 
   postgres:
     image: postgres:latest
