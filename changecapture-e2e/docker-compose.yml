@@ -65,7 +65,7 @@ services:
       CONFLIENT_METRICS_ENABLE: 'false'
       PORT: 9021
     networks:
-      - code-with-yu
+      - cdc-network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9021/health" ]
       interval: 30s
